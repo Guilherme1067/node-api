@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const ProductSchema = new mongoose.Schema({
+
+const ProductSchema = mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -13,10 +14,10 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    createdAt:{
+    createdAt: {
         type: Date,
-        default: Date.now(),        
-    }
+        default: Date.now(),
+    },
 })
 
-mongoose.model('Product', ProductSchema)
+mongoose.model('Products', ProductSchema);
