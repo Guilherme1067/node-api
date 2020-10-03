@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const requireDir = require('require-dir');
 
 const app = express()
 
@@ -8,19 +9,10 @@ mongoose.connect("mongodb://localhost:27017/node-api-own", {
     useUnifiedTopology: true,
 })
 
-require('./src/models/Product');
+requireDir('./src/models');
 
 const Product = mongoose.model('Products');
 
-app.get('/', (req,res) => {
-        Product.create({
-            title:"NodeJS",
-            description: "finally try about basic node connectios with db",
-            url: "www.finally.com",
-        })
-    return res.send('Hello Guilherme, we wish you the best of luck in your new jorney');
-})
-
-
+app.use('/api', require('./src/routes'))
 
 app.listen(3001)
