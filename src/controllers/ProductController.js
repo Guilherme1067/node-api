@@ -5,7 +5,9 @@ const Products = mongoose.model('Products')
 
 module.exports = {
     async index(req,res){
-        const products = await Products.find( );
+        //pega do metodo get o parametro que indica a pag da requisição
+        const { page } = req.query;
+        const products = await Products.paginate({}, {page, limit:5});
         res.json(products);
     },
 
